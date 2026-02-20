@@ -12,6 +12,36 @@ mermaid.initialize({
 const editor = document.getElementById("editor");
 const preview = document.getElementById("preview");
 
+// Zoom state
+const ZOOM_MIN = 0.1;
+const ZOOM_MAX = 3.0;
+const ZOOM_STEP = 0.1;
+let zoomLevel = 1.0;
+
+function applyZoom() {
+  const svg = preview.querySelector("svg");
+  if (svg) {
+    svg.style.transform = `scale(${zoomLevel})`;
+  }
+  document.getElementById("zoom-level").textContent =
+    `${Math.round(zoomLevel * 100)}%`;
+}
+
+document.getElementById("zoom-in").addEventListener("click", () => {
+  zoomLevel = Math.min(ZOOM_MAX, +(zoomLevel + ZOOM_STEP).toFixed(1));
+  applyZoom();
+});
+
+document.getElementById("zoom-out").addEventListener("click", () => {
+  zoomLevel = Math.max(ZOOM_MIN, +(zoomLevel - ZOOM_STEP).toFixed(1));
+  applyZoom();
+});
+
+document.getElementById("zoom-reset").addEventListener("click", () => {
+  zoomLevel = 1.0;
+  applyZoom();
+});
+
 // Debounce utility
 function debounce(fn, ms) {
   let timer;
@@ -57,6 +87,7 @@ async function renderDiagram() {
     const id = `mermaid-${++renderCounter}`;
     const { svg } = await mermaid.render(id, code);
     preview.innerHTML = svg;
+    applyZoom();
   } catch (err) {
     preview.innerHTML = `<div class="error">${escapeHtml(err.message || String(err))}</div>`;
   }

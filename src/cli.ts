@@ -56,6 +56,7 @@ async function main() {
   let content = "";
 
   const args = process.argv.slice(2);
+  const once = args.includes("--once");
   const fileArg = args.find((a) => !a.startsWith("-"));
 
   if (fileArg) {
@@ -68,10 +69,24 @@ async function main() {
   }
 
   const port = await findAvailablePort(3000);
-  const server = startServer(port, content);
+  const server = startServer({
+    port,
+    initialContent: content,
+    onContentServed: once
+      ? () => {
+          setTimeout(() => {
+            server.stop(true);
+            process.exit(0);
+          }, 1000);
+        }
+      : undefined,
+  });
 
   const url = `http://localhost:${port}`;
   console.log(`Mermaid Preview running at ${url}`);
+  if (once) {
+    console.log("(--once: will exit after browser loads)");
+  }
 
   await openBrowser(url);
 

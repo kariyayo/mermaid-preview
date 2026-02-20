@@ -29,6 +29,9 @@ cat test.md | bun run src/cli.ts
 # 空エディタで起動
 bun run src/cli.ts
 
+# ブラウザ読み込み後にプロセスを自動終了（ポートを占有しない）
+bun run src/cli.ts --once test.md
+
 # グローバルインストール
 bun link
 mermaid-preview diagram.md

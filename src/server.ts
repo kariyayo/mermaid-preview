@@ -9,7 +9,13 @@ const MIME_TYPES: Record<string, string> = {
   ".json": "application/json; charset=utf-8",
 };
 
-export function startServer(port: number, initialContent: string) {
+interface ServerOptions {
+  port: number;
+  initialContent: string;
+  onContentServed?: () => void;
+}
+
+export function startServer({ port, initialContent, onContentServed }: ServerOptions) {
   return Bun.serve({
     port,
     fetch(req) {
@@ -18,6 +24,7 @@ export function startServer(port: number, initialContent: string) {
 
       // API endpoint: return initial content
       if (pathname === "/api/content") {
+        onContentServed?.();
         return Response.json({ content: initialContent });
       }
 

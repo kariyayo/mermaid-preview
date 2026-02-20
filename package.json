@@ -1,0 +1,17 @@
+{
+  "name": "mermaid-preview",
+  "version": "1.0.0",
+  "description": "Terminal-launched Mermaid diagram preview tool with live editor",
+  "type": "module",
+  "bin": {
+    "mermaid-preview": "./src/cli.ts"
+  },
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "typecheck": "bun x tsc --noEmit"
+  },
+  "devDependencies": {
+    "bun-types": "^1.3.9",
+    "typescript": "^5.9.3"
+  }
+}

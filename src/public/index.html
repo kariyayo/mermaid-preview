@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mermaid Preview</title>
+  <meta name="theme-color" content="#1e1e2e" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="editor-pane">
+      <div class="pane-header">
+        <span class="pane-title">Editor</span>
+      </div>
+      <textarea id="editor" spellcheck="false" placeholder="Enter Mermaid diagram syntax here...
+
+Example:
+graph TD
+  A[Start] --> B{Decision}
+  B -->|Yes| C[OK]
+  B -->|No| D[Cancel]"></textarea>
+    </div>
+    <div class="divider" id="divider"></div>
+    <div class="preview-pane">
+      <div class="pane-header">
+        <span class="pane-title">Preview</span>
+      </div>
+      <div id="preview"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

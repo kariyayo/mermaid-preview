@@ -75,7 +75,7 @@ editor.addEventListener("input", debounce(renderDiagram, 300));
 // Load initial content from server
 async function loadInitialContent() {
   try {
-    const res = await fetch("/api/content");
+    const res = await fetch("./api/content");
     const data = await res.json();
     if (data.content) {
       editor.value = data.content;
@@ -149,7 +149,7 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e)
 
 // Register Service Worker for PWA
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").catch(() => {});
+  navigator.serviceWorker.register("./sw.js").catch(() => {});
 }
 
 setupDivider();

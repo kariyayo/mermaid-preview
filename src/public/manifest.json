@@ -2,7 +2,7 @@
   "name": "Mermaid Preview",
   "short_name": "Mermaid",
   "description": "Live Mermaid diagram editor and preview",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#1e1e2e",
   "theme_color": "#1e1e2e",

@@ -1,10 +1,10 @@
 const CACHE_NAME = "mermaid-preview-v1";
 
 const PRECACHE_URLS = [
-  "/",
-  "/app.js",
-  "/style.css",
-  "/manifest.json",
+  "./",
+  "./app.js",
+  "./style.css",
+  "./manifest.json",
 ];
 
 const CDN_CACHE_NAME = "mermaid-cdn-v1";
@@ -54,7 +54,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Skip API calls — always go to network
-  if (url.pathname.startsWith("/api/")) {
+  if (url.pathname.includes("/api/")) {
     return;
   }
 
